@@ -333,8 +333,7 @@ class PipeLine:
         - Sets internal flag `_prepared` to True on success.
         """
         try:
-            if self.workflow is None:
-                self.workflow = self.load_component(**self.cnfg['workflow'])
+            self.workflow = self.load_component(**self.cnfg['workflow'])
             self._prepared = self.workflow.prepare()
         except:
             traceback.print_exc()
