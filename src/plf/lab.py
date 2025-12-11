@@ -140,7 +140,6 @@ def setup_databases(settings: dict):
     """
     create_and_init_db(archived_ppls_db_path, [archived_ppls_table])
 
-
 def lab_setup(settings_path: Optional[str]) -> None:
     if settings_path and os.path.exists(settings_path):
         with open(settings_path, encoding="utf-8") as sp:
@@ -179,3 +178,5 @@ def get_logs():
     df = pd.DataFrame(rows, columns=col_names)
     return df
 
+def lab_clone():
+    pass
