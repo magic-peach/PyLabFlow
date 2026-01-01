@@ -126,12 +126,12 @@ def import_transfer(zip_path: Path):
 # ---------------------------
 # Internal: BASE -> REMOTE
 # ---------------------------
-def _export_base_to_remote(ppls, clone_id, transfer_type, mode):
+def _export_base_to_remote(ppls, clone_id, transfer_type, mode="copy"):
     settings = get_shared_data()
     _ensure_base(settings)
-    base_data = Path(settings["data_path"])
 
-    clone_dir = base_data / "Clones" / clone_id
+    lab_base = Path(settings["data_path"]).resolve()
+    clone_dir = lab_base / "Clones" / clone_id
     if not clone_dir.exists():
         raise ValueError(f"Clone '{clone_id}' not registered")
 
@@ -146,9 +146,7 @@ def _export_base_to_remote(ppls, clone_id, transfer_type, mode):
         "direction": "base_to_remote",
         "transfer_type": transfer_type,
         "created_at": datetime.utcnow().isoformat(),
-        "ppls": {},
-        "path_map": {},
-        "component_map": {}
+        "ppls": ppls,
     }
 
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
@@ -156,48 +154,53 @@ def _export_base_to_remote(ppls, clone_id, transfer_type, mode):
             P = PipeLine()
             if not P.verify(pplid=pplid):
                 raise ValueError(f"Invalid pplid: {pplid}")
+
             P.load(pplid)
 
-            # Config
-            cfg_path = Path(P.get_path(of="config"))
-            cfg_bytes = cfg_path.read_bytes()
-            cfg_hash = hashlib.sha256(cfg_bytes).hexdigest()
-            transfer_meta["ppls"][pplid] = {"config_hash": cfg_hash}
+            # ---- CONFIG (always file) ----
+            cfg = Path(P.get_path(of="config")).resolve()
+            arcname = cfg.relative_to(lab_base)
+            zf.write(cfg, arcname)
 
-            zf.writestr(f"Configs/{pplid}.json", cfg_bytes)
-
-            # Artifacts (files or dirs)
-            for art in list(P.paths):
+            # ---- ARTIFACTS (file or dir) ----
+            for art in P.paths:
                 if art == "config":
                     continue
+
                 try:
-                    p = Path(P.get_path(of=art))
+                    p = Path(P.get_path(of=art)).resolve()
                     if not p.exists():
                         continue
+
                     if p.is_dir():
                         for f in p.rglob("*"):
                             if f.is_file():
-                                zf.write(f, f"Artifacts/{pplid}/{art}/{f.relative_to(p)}")
+                                zf.write(
+                                    f,
+                                    f.relative_to(lab_base)
+                                )
                     else:
-                        zf.write(p, f"Artifacts/{pplid}/{art}/{p.name}")
+                        zf.write(
+                            p,
+                            p.relative_to(lab_base)
+                        )
                 except Exception:
                     pass
 
-        # write transfer.json last
+        # ---- transfer.json LAST ----
         zf.writestr("transfer.json", json.dumps(transfer_meta, indent=4))
 
-    # register in clone.json
+    # ---- REGISTER TRANSFER ----
     clone_json = clone_dir / "clone.json"
     clone_cfg = json.loads(clone_json.read_text())
     clone_cfg.setdefault("transfers", []).append(transfer_id)
     clone_json.write_text(json.dumps(clone_cfg, indent=4))
 
-    # Move/copy mode
+    # ---- MOVE MODE ----
     if mode == "move":
         for pplid in ppls:
-            # remove source artifacts after zip creation
             P = PipeLine(pplid)
-            for art in list(P.paths):
+            for art in P.paths:
                 if art == "config":
                     continue
                 p = Path(P.get_path(of=art))
@@ -267,22 +270,52 @@ def _export_remote_to_base(ppls, prev_transfer_id=None, mode="copy"):
 # ---------------------------
 # Internal: import on remote
 # ---------------------------
-def _import_on_remote(zip_path, meta):
+def _import_on_remote(zip_path, meta, mode="copy"):
     settings = get_shared_data()
-    transfers_dir = Path(settings["data_path"]) / "Transfers"
+    lab_base = Path(settings["data_path"]).resolve()
+
+    transfers_dir = lab_base / "Transfers"
     transfers_dir.mkdir(exist_ok=True)
 
+    # ---- Stage extraction ----
     extract_dir = transfers_dir / meta["transfer_id"]
+    extract_dir.mkdir(parents=True, exist_ok=True)
+
     _safe_extract(zip_path, extract_dir)
 
+    # ---- Materialize into lab ----
+    for item in extract_dir.rglob("*"):
+        if item.is_dir():
+            continue
+
+        # transfer.json stays in Transfers
+        if item.name == "transfer.json":
+            continue
+
+        rel_path = item.relative_to(extract_dir)
+        target = lab_base / rel_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+
+        if target.exists():
+            target.unlink()
+
+        if mode == "move":
+            shutil.move(item, target)
+        else:
+            shutil.copy2(item, target)
+
+    # ---- Attach transfer context (provenance only) ----
     ctx = TransferContext(
         path_map=meta.get("path_map", {}),
         component_map=meta.get("component_map", {}),
-        transfer_id=meta["transfer_id"]
+        transfer_id=meta["transfer_id"],
+        origin_lab_id=meta.get("origin_lab_id"),
     )
 
     settings["transfer_context"] = ctx
     set_shared_data(settings)
+
+    return True
 
 # ---------------------------
 # Internal: import on base
