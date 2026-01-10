@@ -1,12 +1,14 @@
 """
 create or use our lab
 """
+
 from pathlib import Path
 import os
 import json
 from datetime import datetime
 from typing import Optional
 import pandas as pd
+
 
 from .context import set_shared_data, get_caller, register_libs_path, get_shared_data
 from .utils import Db
@@ -175,6 +177,18 @@ def lab_setup(settings_path: Optional[str]) -> None:
     register_libs_path(settings["component_dir"])
    
 def get_logs():
+    """
+    Retrieve all log records from the logs database and return them as a DataFrame.
+
+    This function reads shared application settings to locate the SQLite
+    `logs.db` file, queries all rows from the `logs` table, and converts
+    the results into a pandas DataFrame with column names preserved.
+
+    Returns
+    -------
+    pandas.DataFrame
+        A DataFrame containing all records from the `logs` table.
+    """
     settings = get_shared_data()
     log_path = os.path.join(settings["data_path"], "logs.db")
     db = Db(db_path=log_path)
@@ -185,7 +199,7 @@ def get_logs():
     df = pd.DataFrame(rows, columns=col_names)
     return df
 
-from uuid import uuid4
+
 
 def create_clone(name, desc="", clone_type="remote", clone_id=None):
     """

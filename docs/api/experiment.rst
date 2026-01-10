@@ -8,4 +8,5 @@ experiment
    :undoc-members:
    :inherited-members:
    :show-inheritance:
+   :exclude-members: PipeLine
 
