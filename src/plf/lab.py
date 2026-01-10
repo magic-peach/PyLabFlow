@@ -38,6 +38,11 @@ def create_project(settings: dict) -> str:
 
     # Update settings with absolute paths
     settings.update({
+
+        "lab_id": None,
+        "lab_role": "base",
+
+
         "project_dir": project_dir,
         "component_dir": component_dir,
         "data_path": data_path,
@@ -269,13 +274,6 @@ def init_clone(
         "project_dir": project_dir,
         "component_dir": component_dir,
 
-        # Runtime
-        "data_path": data_path,
-        "clone_config": clone_config,
-
-        # Transfer/runtime state
-        "transfer_context": None,
-        "created_at": datetime.utcnow().isoformat(),
     }
 
     # -----------------------------
