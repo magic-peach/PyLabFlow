@@ -1,9 +1,0 @@
-.. currentmodule:: plf._pipeline
-
-_pipeline
-=========
-
-.. automodule:: plf._pipeline
-   :members:
-   :undoc-members:
-   :show-inheritance:

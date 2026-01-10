@@ -13,7 +13,7 @@ import pandas as pd
 from .context import set_shared_data, get_caller, register_libs_path, get_shared_data
 from .utils import Db
 
-__all__ = ["lab_setup", "create_project", "get_logs"]
+__all__ = ["lab_setup", "create_project", "get_logs", 'create_clone', 'init_clone']
  
 def export_settigns():
     settings = get_shared_data()

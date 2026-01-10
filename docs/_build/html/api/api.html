@@ -52,7 +52,6 @@
 <li class="toctree-l2"><a class="reference internal" href="lab.html">lab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="experiment.html">experiment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_pipeline.html">_pipeline</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog/index.html">Change Logs</a></li>
@@ -95,8 +94,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="lab.html">lab</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lab.html#plf.lab.create_clone"><code class="docutils literal notranslate"><span class="pre">create_clone()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab.html#plf.lab.create_project"><code class="docutils literal notranslate"><span class="pre">create_project()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab.html#plf.lab.get_logs"><code class="docutils literal notranslate"><span class="pre">get_logs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab.html#plf.lab.init_clone"><code class="docutils literal notranslate"><span class="pre">init_clone()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab.html#plf.lab.lab_setup"><code class="docutils literal notranslate"><span class="pre">lab_setup()</span></code></a></li>
 </ul>
 </li>
@@ -133,6 +134,29 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="experiment.html">experiment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine"><code class="docutils literal notranslate"><span class="pre">PipeLine</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.clean"><code class="docutils literal notranslate"><span class="pre">PipeLine.clean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.get_path"><code class="docutils literal notranslate"><span class="pre">PipeLine.get_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.is_running"><code class="docutils literal notranslate"><span class="pre">PipeLine.is_running()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.load"><code class="docutils literal notranslate"><span class="pre">PipeLine.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.load_component"><code class="docutils literal notranslate"><span class="pre">PipeLine.load_component()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.new"><code class="docutils literal notranslate"><span class="pre">PipeLine.new()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.paths"><code class="docutils literal notranslate"><span class="pre">PipeLine.paths</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.prepare"><code class="docutils literal notranslate"><span class="pre">PipeLine.prepare()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.reset"><code class="docutils literal notranslate"><span class="pre">PipeLine.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.run"><code class="docutils literal notranslate"><span class="pre">PipeLine.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.should_running"><code class="docutils literal notranslate"><span class="pre">PipeLine.should_running</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.status"><code class="docutils literal notranslate"><span class="pre">PipeLine.status()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.stop_running"><code class="docutils literal notranslate"><span class="pre">PipeLine.stop_running()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.PipeLine.verify"><code class="docutils literal notranslate"><span class="pre">PipeLine.verify()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experiment.html#plf.experiment.TransferContext"><code class="docutils literal notranslate"><span class="pre">TransferContext</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.TransferContext.map_cnfg"><code class="docutils literal notranslate"><span class="pre">TransferContext.map_cnfg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.TransferContext.map_loc"><code class="docutils literal notranslate"><span class="pre">TransferContext.map_loc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiment.html#plf.experiment.TransferContext.map_src"><code class="docutils literal notranslate"><span class="pre">TransferContext.map_src()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="experiment.html#plf.experiment.archive_ppl"><code class="docutils literal notranslate"><span class="pre">archive_ppl()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="experiment.html#plf.experiment.delete_ppl"><code class="docutils literal notranslate"><span class="pre">delete_ppl()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="experiment.html#plf.experiment.filter_ppls"><code class="docutils literal notranslate"><span class="pre">filter_ppls()</span></code></a></li>
@@ -141,34 +165,6 @@
 <li class="toctree-l2"><a class="reference internal" href="experiment.html#plf.experiment.get_ppls"><code class="docutils literal notranslate"><span class="pre">get_ppls()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="experiment.html#plf.experiment.group_by_common_columns"><code class="docutils literal notranslate"><span class="pre">group_by_common_columns()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="experiment.html#plf.experiment.transfer_ppl"><code class="docutils literal notranslate"><span class="pre">transfer_ppl()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="_pipeline.html">_pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_pipeline.html#plf._pipeline.CompsDict"><code class="docutils literal notranslate"><span class="pre">CompsDict</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.CompsDict.dataset"><code class="docutils literal notranslate"><span class="pre">CompsDict.dataset</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.CompsDict.loss"><code class="docutils literal notranslate"><span class="pre">CompsDict.loss</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.CompsDict.metrics"><code class="docutils literal notranslate"><span class="pre">CompsDict.metrics</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.CompsDict.model"><code class="docutils literal notranslate"><span class="pre">CompsDict.model</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.CompsDict.optimizer"><code class="docutils literal notranslate"><span class="pre">CompsDict.optimizer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine"><code class="docutils literal notranslate"><span class="pre">PipeLine</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.clean"><code class="docutils literal notranslate"><span class="pre">PipeLine.clean()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.get_path"><code class="docutils literal notranslate"><span class="pre">PipeLine.get_path()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.is_running"><code class="docutils literal notranslate"><span class="pre">PipeLine.is_running()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.load"><code class="docutils literal notranslate"><span class="pre">PipeLine.load()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.load_component"><code class="docutils literal notranslate"><span class="pre">PipeLine.load_component()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.new"><code class="docutils literal notranslate"><span class="pre">PipeLine.new()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.paths"><code class="docutils literal notranslate"><span class="pre">PipeLine.paths</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.prepare"><code class="docutils literal notranslate"><span class="pre">PipeLine.prepare()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.reset"><code class="docutils literal notranslate"><span class="pre">PipeLine.reset()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.run"><code class="docutils literal notranslate"><span class="pre">PipeLine.run()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.should_running"><code class="docutils literal notranslate"><span class="pre">PipeLine.should_running</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.status"><code class="docutils literal notranslate"><span class="pre">PipeLine.status()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.stop_running"><code class="docutils literal notranslate"><span class="pre">PipeLine.stop_running()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="_pipeline.html#plf._pipeline.PipeLine.verify"><code class="docutils literal notranslate"><span class="pre">PipeLine.verify()</span></code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

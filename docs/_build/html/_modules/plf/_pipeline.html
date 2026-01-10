@@ -94,8 +94,6 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">._transfer_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransferContext</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.context</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_shared_data</span>
 
-<div class="viewcode-block" id="CompsDict">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.CompsDict">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CompsDict</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    fgfvv</span>
@@ -105,13 +103,12 @@
     <span class="n">loss</span><span class="p">:</span> <span class="n">Component</span>
     <span class="n">optimizer</span><span class="p">:</span> <span class="n">Component</span>
     <span class="n">dataset</span><span class="p">:</span> <span class="n">Component</span>
-    <span class="n">metrics</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Component</span><span class="p">]</span></div>
-
+    <span class="n">metrics</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Component</span><span class="p">]</span>
 
 
 <span class="c1"># _core.py</span>
 <div class="viewcode-block" id="PipeLine">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PipeLine</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    khgkjv</span>
@@ -158,7 +155,7 @@
             <span class="p">)</span>
 
 <div class="viewcode-block" id="PipeLine.get_path">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.get_path">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.get_path">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_path</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">of</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -222,7 +219,7 @@
 
 
 <div class="viewcode-block" id="PipeLine.load">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.load">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.load">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pplid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prepare</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load a pipeline configuration from disk&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -246,7 +243,7 @@
 
 
 <div class="viewcode-block" id="PipeLine.reset">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.reset">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.reset">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        reset</span>
@@ -261,7 +258,7 @@
 
 
 <div class="viewcode-block" id="PipeLine.load_component">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.load_component">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.load_component">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">load_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">loc</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">setup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lab_role&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;base&quot;</span><span class="p">:</span>
             <span class="n">Tsx</span> <span class="o">=</span> <span class="n">TransferContext</span><span class="p">()</span>
@@ -274,7 +271,7 @@
 
 
 <div class="viewcode-block" id="PipeLine.verify">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.verify">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.verify">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">pplid</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cnfg</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether a given experiment ID exists in the experiment database.</span>
@@ -332,7 +329,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;same configuration is already exists in: </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     
 <div class="viewcode-block" id="PipeLine.new">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.new">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.new">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">new</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">pplid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -402,7 +399,7 @@
 
     
 <div class="viewcode-block" id="PipeLine.prepare">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.prepare">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.prepare">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prepare the experiment by loading model, optimizer, metrics, loss, and data loaders.</span>
@@ -443,7 +440,7 @@
 
    
 <div class="viewcode-block" id="PipeLine.run">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.run">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepared</span><span class="p">:</span>
@@ -477,7 +474,7 @@
 
 
 <div class="viewcode-block" id="PipeLine.is_running">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.is_running">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.is_running">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_running</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="s2">&quot;SELECT logid FROM runnings WHERE pplid = ?&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pplid</span><span class="p">,)</span>
@@ -497,7 +494,7 @@
         <span class="k">return</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="PipeLine.stop_running">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.stop_running">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.stop_running">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">stop_running</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">logid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">logid</span><span class="p">:</span>
@@ -519,7 +516,7 @@
         <span class="k">return</span> <span class="n">artifs</span>
    
 <div class="viewcode-block" id="PipeLine.clean">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.clean">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.clean">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnfg</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Empty Pipeline&quot;</span><span class="p">)</span>
@@ -533,7 +530,7 @@
 
 
 <div class="viewcode-block" id="PipeLine.status">
-<a class="viewcode-back" href="../../api/_pipeline.html#plf._pipeline.PipeLine.status">[docs]</a>
+<a class="viewcode-back" href="../../api/experiment.html#plf.experiment.PipeLine.status">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnfg</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Empty Pipeline&quot;</span><span class="p">)</span>

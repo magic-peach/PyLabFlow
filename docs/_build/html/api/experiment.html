@@ -20,7 +20,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="_pipeline" href="_pipeline.html" />
+    <link rel="next" title="Change Logs" href="../changelog/index.html" />
     <link rel="prev" title="utils" href="utils.html" /> 
 </head>
 
@@ -52,6 +52,29 @@
 <li class="toctree-l2"><a class="reference internal" href="lab.html">lab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">experiment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plf.experiment.PipeLine"><code class="docutils literal notranslate"><span class="pre">PipeLine</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.clean"><code class="docutils literal notranslate"><span class="pre">PipeLine.clean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.get_path"><code class="docutils literal notranslate"><span class="pre">PipeLine.get_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.is_running"><code class="docutils literal notranslate"><span class="pre">PipeLine.is_running()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.load"><code class="docutils literal notranslate"><span class="pre">PipeLine.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.load_component"><code class="docutils literal notranslate"><span class="pre">PipeLine.load_component()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.new"><code class="docutils literal notranslate"><span class="pre">PipeLine.new()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.paths"><code class="docutils literal notranslate"><span class="pre">PipeLine.paths</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.prepare"><code class="docutils literal notranslate"><span class="pre">PipeLine.prepare()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.reset"><code class="docutils literal notranslate"><span class="pre">PipeLine.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.run"><code class="docutils literal notranslate"><span class="pre">PipeLine.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.should_running"><code class="docutils literal notranslate"><span class="pre">PipeLine.should_running</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.status"><code class="docutils literal notranslate"><span class="pre">PipeLine.status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.stop_running"><code class="docutils literal notranslate"><span class="pre">PipeLine.stop_running()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.PipeLine.verify"><code class="docutils literal notranslate"><span class="pre">PipeLine.verify()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#plf.experiment.TransferContext"><code class="docutils literal notranslate"><span class="pre">TransferContext</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.TransferContext.map_cnfg"><code class="docutils literal notranslate"><span class="pre">TransferContext.map_cnfg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.TransferContext.map_loc"><code class="docutils literal notranslate"><span class="pre">TransferContext.map_loc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plf.experiment.TransferContext.map_src"><code class="docutils literal notranslate"><span class="pre">TransferContext.map_src()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#plf.experiment.archive_ppl"><code class="docutils literal notranslate"><span class="pre">archive_ppl()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#plf.experiment.delete_ppl"><code class="docutils literal notranslate"><span class="pre">delete_ppl()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#plf.experiment.filter_ppls"><code class="docutils literal notranslate"><span class="pre">filter_ppls()</span></code></a></li>
@@ -62,7 +85,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#plf.experiment.transfer_ppl"><code class="docutils literal notranslate"><span class="pre">transfer_ppl()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="_pipeline.html">_pipeline</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog/index.html">Change Logs</a></li>
@@ -96,6 +118,258 @@
   <section id="module-plf.experiment">
 <span id="experiment"></span><h1>experiment<a class="headerlink" href="#module-plf.experiment" title="Link to this heading"></a></h1>
 <p>This module  have all  function  for initiating pipeline and training</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PipeLine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pplid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>khgkjv</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.clean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.clean" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.get_path">
+<span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">of</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pplid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.get_path" title="Link to this definition"></a></dt>
+<dd><p>Generate a standardized file path for various experiment artifacts.</p>
+<p>Constructs and returns a file path based on the type of file (<cite>of</cite>), experiment ID,
+epoch number, and batch index, where applicable. Automatically creates necessary
+directories if they do not exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>of</strong> (<em>str</em>) – The type of file to retrieve the path for. Supported values:
+- “config”: Configuration file path.
+- “weight”: Model weights file path.
+- “gradient”: Saved gradients file path.
+- “history”: Training history file path.
+- “quick”: Quick config file path.</p></li>
+<li><p><strong>pplid</strong> (<em>str</em><em>, </em><em>optional</em>) – Experiment ID. If not provided, uses the currently set <cite>self.pplid</cite>.</p></li>
+<li><p><strong>epoch</strong> (<em>int</em><em>, </em><em>optional</em>) – Epoch number. Required for weight and gradient file paths.
+For weights, if not specified, the best epoch from config is used.</p></li>
+<li><p><strong>batch</strong> (<em>int</em><em>, </em><em>optional</em>) – Batch index, required for gradient file paths.</p></li>
+<li><p><strong>args</strong> (<em>Dict</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Full path to the specified artifact as a string with forward slashes.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <cite>pplid</cite> is not set or invalid.
+    If required parameters (<cite>epoch</cite>, <cite>batch</cite>) are missing for gradient paths.
+    If the <cite>of</cite> argument is not one of the supported values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.is_running">
+<span class="sig-name descname"><span class="pre">is_running</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.is_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.is_running" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pplid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.load" title="Link to this definition"></a></dt>
+<dd><p>Load a pipeline configuration from disk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pplid</strong> (<em>str</em>)</p></li>
+<li><p><strong>prepare</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.load_component">
+<span class="sig-name descname"><span class="pre">load_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.load_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.load_component" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loc</strong> (<em>str</em>)</p></li>
+<li><p><strong>args</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>setup</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.new">
+<span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pplid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepare</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.new" title="Link to this definition"></a></dt>
+<dd><p>Create a new experiment configuration and initialize its tracking files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pplid</strong> (<em>str</em><em>, </em><em>optional</em>) – Unique experiment identifier. Raises ValueError if it already exists.</p></li>
+<li><p><strong>args</strong> (<em>dict</em><em>, </em><em>optional</em>) – Configuration arguments for the experiment.</p></li>
+<li><p><strong>prepare</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, calls <cite>self.prepare()</cite> after creation. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the experiment ID already exists or if monitor mode is invalid.</p></li>
+<li><p><strong>KeyError</strong> – If ‘metrics’ key is missing from settings.</p></li>
+<li><p><strong>Behavior</strong> – </p></li>
+<li><p><strong>--------</strong> – </p></li>
+<li><p><strong>- Checks if the experiment ID already exists; raises an error if so.</strong> – </p></li>
+<li><p><strong>- Checks if the same configuration already exists using verify.</strong> – </p></li>
+<li><p><strong>- Initializes configuration dictionary with metadata.</strong> – </p></li>
+<li><p><strong>- Saves the configuration.</strong> – </p></li>
+<li><p><strong>- Creates an empty history CSV with columns for training and validation metrics and loss.</strong> – </p></li>
+<li><p><strong>- Initializes quick checkpoint file with default best and last epoch metrics.</strong> – </p></li>
+<li><p><strong>- Appends experiment metadata to the main experiments CSV.</strong> – </p></li>
+<li><p><strong>- Optionally calls self.prepare</strong><strong>(</strong><strong>) </strong><strong>if prepare=True.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.paths">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">paths</span></span><a class="headerlink" href="#plf.experiment.PipeLine.paths" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.prepare">
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.prepare" title="Link to this definition"></a></dt>
+<dd><p>Prepare the experiment by loading model, optimizer, metrics, loss, and data loaders.</p>
+<p>Loads components according to current configuration, initializes data loaders,
+and sets the best metric value based on the stored history and strategy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If strategy monitor mode is not ‘min’ or ‘max’.</p></li>
+<li><p><strong>Behavior</strong> – </p></li>
+<li><p><strong>--------</strong> – </p></li>
+<li><p><strong>- Loads model and moves it to device.</strong> – </p></li>
+<li><p><strong>- Loads optimizer with model parameters.</strong> – </p></li>
+<li><p><strong>- Loads metrics and loss functions to device.</strong> – </p></li>
+<li><p><strong>- Creates training and validation data loaders.</strong> – </p></li>
+<li><p><strong>- Loads last saved model weights.</strong> – </p></li>
+<li><p><strong>- Initializes the best metric value from saved checkpoints</strong><strong> or </strong><strong>sets default.</strong> – </p></li>
+<li><p><strong>- Sets internal flag _prepared to True on success.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.reset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.run" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.should_running">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">should_running</span></span><a class="headerlink" href="#plf.experiment.PipeLine.should_running" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.stop_running">
+<span class="sig-name descname"><span class="pre">stop_running</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.stop_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.stop_running" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.PipeLine.verify">
+<span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">pplid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cnfg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_pipeline.html#PipeLine.verify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.PipeLine.verify" title="Link to this definition"></a></dt>
+<dd><p>Check whether a given experiment ID exists in the experiment database.</p>
+<p>Queries the experiments table to verify whether the specified experiment ID is recorded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pplid</strong> (<em>str</em>) – The experiment ID to check.</p></li>
+<li><p><strong>cnfg</strong> (<em>Dict</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the <cite>pplid</cite> if it exists in the database, otherwise returns <cite>False</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[str, bool]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">&quot;exp_001&quot;</span><span class="p">)</span>
+<span class="go">&#39;exp_001&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">&quot;nonexistent_exp&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="plf.experiment.TransferContext">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TransferContext</span></span><a class="reference internal" href="../_modules/plf/_transfer_utils.html#TransferContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.TransferContext" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Runtime context for remapping paths and components on remote.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.TransferContext.map_cnfg">
+<span class="sig-name descname"><span class="pre">map_cnfg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cnfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_transfer_utils.html#TransferContext.map_cnfg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.TransferContext.map_cnfg" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.TransferContext.map_loc">
+<span class="sig-name descname"><span class="pre">map_loc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pplid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_transfer_utils.html#TransferContext.map_loc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.TransferContext.map_loc" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loc</strong> (<em>str</em>)</p></li>
+<li><p><strong>pplid</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plf.experiment.TransferContext.map_src">
+<span class="sig-name descname"><span class="pre">map_src</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pplid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/_transfer_utils.html#TransferContext.map_src"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.TransferContext.map_src" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<em>str</em>)</p></li>
+<li><p><strong>pplid</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="plf.experiment.archive_ppl">
 <span class="sig-name descname"><span class="pre">archive_ppl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ppls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/plf/experiment.html#archive_ppl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plf.experiment.archive_ppl" title="Link to this definition"></a></dt>
@@ -256,7 +530,7 @@ logging files, and database records.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="utils.html" class="btn btn-neutral float-left" title="utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="_pipeline.html" class="btn btn-neutral float-right" title="_pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../changelog/index.html" class="btn btn-neutral float-right" title="Change Logs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

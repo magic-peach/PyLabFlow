@@ -88,7 +88,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.context</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_shared_data</span><span class="p">,</span> <span class="n">get_caller</span><span class="p">,</span> <span class="n">register_libs_path</span><span class="p">,</span> <span class="n">get_shared_data</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Db</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lab_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;create_project&quot;</span><span class="p">,</span> <span class="s2">&quot;get_logs&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lab_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;create_project&quot;</span><span class="p">,</span> <span class="s2">&quot;get_logs&quot;</span><span class="p">,</span> <span class="s1">&#39;create_clone&#39;</span><span class="p">,</span> <span class="s1">&#39;init_clone&#39;</span><span class="p">]</span>
  
 <span class="k">def</span><span class="w"> </span><span class="nf">export_settigns</span><span class="p">():</span>
     <span class="n">settings</span> <span class="o">=</span> <span class="n">get_shared_data</span><span class="p">()</span>
@@ -285,6 +285,8 @@
 
 
 
+<div class="viewcode-block" id="create_clone">
+<a class="viewcode-back" href="../../api/lab.html#plf.lab.create_clone">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">create_clone</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">clone_type</span><span class="o">=</span><span class="s2">&quot;remote&quot;</span><span class="p">,</span> <span class="n">clone_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a clone entry in BASE lab.</span>
@@ -323,10 +325,13 @@
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">clones_dir</span> <span class="o">/</span> <span class="s2">&quot;clone.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clone_cfg</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">clone_cfg</span>
+    <span class="k">return</span> <span class="n">clone_cfg</span></div>
 
 
 
+
+<div class="viewcode-block" id="init_clone">
+<a class="viewcode-back" href="../../api/lab.html#plf.lab.init_clone">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">init_clone</span><span class="p">(</span>
     <span class="n">clone_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -397,7 +402,8 @@
     <span class="n">set_shared_data</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
     <span class="n">register_libs_path</span><span class="p">(</span><span class="n">component_dir</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">settings_path</span>
+    <span class="k">return</span> <span class="n">settings_path</span></div>
+
 </pre></div>
 
            </div>
