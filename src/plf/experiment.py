@@ -455,6 +455,12 @@ def transfer_ppl(
     if isinstance(ppls, str):
         ppls = [ppls]
 
+    from ._transfer_utils import TransferContext
+    transfer_ctx = TransferContext()
+
+    ppls_to_transfer = transfer_ctx.resolve_dependencies(ppls)
+    print(f"Resolved transfer list: {ppls} -> {ppls_to_transfer}")
+
     base_path = settings["data_path"]
 
     if transfer_type == "export":
@@ -471,11 +477,11 @@ def transfer_ppl(
     df = pd.read_csv(f"{source}/ppls.csv")
     records = df["name"] if "name" in df.columns else df["pplid"]
 
-    if not all(exp in records.values for exp in ppls):
-        raise ValueError(f"One or more of ppls: {ppls} is/are invalid")
+    if not all(exp in records.values for exp in ppls_to_transfer):
+        raise ValueError(f"One or more of ppls: {ppls_to_transfer} is/are invalid")
 
     if mode == "copy":
-        for exp in ppls:
+        for exp in ppls_to_transfer:
             shutil.copy2(f"{source}/Configs/{exp}.json", f"{destin}/Configs/{exp}.json")
             shutil.copy2(
                 f"{source}/Histories/{exp}.csv", f"{destin}/Histories/{exp}.csv"
@@ -488,10 +494,10 @@ def transfer_ppl(
         else:
             df_to_transfer = df[df["pplid"].isin(ppls)]
         df_to_transfer.to_csv(f"{destin}/ppls.csv", mode="a", header=False, index=False)
-        print(f"{ppls} are transferred successfully")
+        print(f"{ppls_to_transfer} are transferred successfully")
 
     elif mode == "move":
-        for exp in ppls:
+        for exp in ppls_to_transfer:
             shutil.move(f"{source}/Weights/{exp}", f"{destin}/Weights/")
             shutil.move(f"{source}/Configs/{exp}.json", f"{destin}/Configs/{exp}.json")
             shutil.move(
@@ -500,16 +506,16 @@ def transfer_ppl(
             shutil.move(f"{source}/Gradients/{exp}", f"{destin}/Gradients/")
 
         if "name" in df.columns:
-            df_to_move = df[df["name"].isin(ppls)]
-            df_remaining = df[~df["name"].isin(ppls)]
+            df_to_move = df[df["name"].isin(ppls_to_transfer)]
+            df_remaining = df[~df["name"].isin(ppls_to_transfer)]
         else:
-            df_to_move = df[df["pplid"].isin(ppls)]
-            df_remaining = df[~df["pplid"].isin(ppls)]
+            df_to_move = df[df["pplid"].isin(ppls_to_transfer)]
+            df_remaining = df[~df["pplid"].isin(ppls_to_transfer)]
 
         df_remaining.to_csv(f"{source}/ppls.csv", index=False)
         df_to_move.to_csv(f"{destin}/ppls.csv", mode="a", header=False, index=False)
 
-        print(f"{ppls} are transferred successfully")
+        print(f"{ppls_to_transfer} are transferred successfully")
 
     else:
         raise ValueError(f"Invalid mode: {mode}. Expected 'copy' or 'move'.")
